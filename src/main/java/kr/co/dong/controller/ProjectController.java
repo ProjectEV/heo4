@@ -250,26 +250,6 @@ public class ProjectController {
 			    return "redirect:/product/pwd_search"; // 완료 후 비밀번호 찾기 화면으로 이동
 			}
 			
-		
-			
-		
-			
-			
-			
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//제품 상세페이지
 		@RequestMapping(value="product/detail", method=RequestMethod.GET)
 		public String ProductDetail(@RequestParam("product_id") String product_id, Model model) {
