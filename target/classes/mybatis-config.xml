@@ -10,6 +10,9 @@
  		<typeAlias alias="InventoryVO" type="kr.co.dong.project.InventoryVO"/>
  		<typeAlias alias="UserDTO" type="kr.co.dong.board.UserDTO"/>
  		<typeAlias alias="BoardsDTO" type="kr.co.dong.board.BoardsDTO"/>
+ 		<typeAlias alias="NaverUserInfo" type="kr.co.dong.board.NaverUserInfo"/>
+ 		<typeAlias alias="ProductDTO" type="kr.co.dong.board.ProductDTO"/>
+ 		
  		
  	</typeAliases>
  </configuration>

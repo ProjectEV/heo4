@@ -131,7 +131,7 @@
   								    <span class="star">&#9733;</span>
          							<span class="star">&#9733;</span>
          							<span class="star">&#9733;</span>
-         							<input type="hidden" id="rating" name="rating" >
+         							<input type="hidden" id="boards_review_score" name="boards_review_score" >
       							</div>
                             		
                              	<p class="form-label">제목 <span>*</span></p>
@@ -190,11 +190,11 @@
         $(this).addClass('on').prevAll('span').addClass('on');
 
         // 선택된 별점 개수를 구하여 변수에 저장
-        const rating = $(this).parent().children('span.on').length;
-        alert(rating);
+        const boards_review_score = $(this).parent().children('span.on').length;
+        alert(boards_review_score);
 
         // 'rating' 값을 hidden input에 저장
-        $('#rating').val(rating);
+        $('#boards_review_score').val(boards_review_score);
     });
     
     

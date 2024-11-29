@@ -193,7 +193,7 @@
                             
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                           			 <button type="reset" onclick="idCheck()" class="site-btn" style="width: 116.01px; height: 44.98px; margin-top: 35px; " >다시작성</button>
+                           			 <button type="button" onclick="idCheck()" class="site-btn" style="width: 116.01px; height: 44.98px; margin-top: 35px; " >중복체크</button>
                            			 
                             	</div>
                             </div>

@@ -4,17 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript">
-//아이디 중복확인 완료한 값 join으로 넘겨주기
-function idok() {
-	opener.join_form.user_id.value = document.id_checkform.user_id.value;
-	opener.join_form.reid.value = document.id_checkform.user_id.value;
-	self.close();
-}
-
-
-</script>
-
 
 
 <meta charset="UTF-8">
@@ -31,7 +20,7 @@ function idok() {
 		
 		<c:if test = "${r == 1}">
 			<script type="text/javascript">
-			opener.document.id_checkform.value="";
+			opener.document.join_form.user_id.value="";
 			</script>
 			${user_id}는 이미 사용중인 아이디 입니다.
 		</c:if >
@@ -41,6 +30,17 @@ function idok() {
 			<button type="button" value="사용" onclick="idok()">사용</button>
 		</c:if>		
 	</form>
+	
+	<script type="text/javascript">
+	document.id_checkform.user_id.value = user_id;
+	//아이디 중복확인 완료한 값 join으로 넘겨주기
+	function idok() {
+		opener.join_form.user_id.value = document.id_checkform.user_id.value;
+		opener.join_form.reid.value = document.id_checkform.user_id.value;
+		self.close();
+	}
+	</script>
+	
 
 
 

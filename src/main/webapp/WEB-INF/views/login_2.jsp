@@ -64,9 +64,7 @@
             cursor: pointer; /* 클릭 가능한 커서 표시 */	
              text-decoration: none; /* 처음부터 밑줄 제거 */
         }
-
-    
-        
+     
     </style>
     		
     		
@@ -78,25 +76,44 @@
 
 	 <div class="contact__form">
                             <h5>로그인</h5>
-                            <form method="post" action="/product/login">
+                            <form method="post" action="/product/login" name="login_form" >
                                 <input type="text" id="user_id" name="user_id" style="width: 300px;" placeholder="아이디"> <br>
                                 <input type="password"  id="user_password" name="user_password" style="width: 300px;" placeholder="비밀번호"><br>
 								<button type="submit" class="site-btn">로그인</button>&nbsp;&nbsp;&nbsp;
 								<button type="button" class="site-btn" onclick="location.href='/product/join'" >회원가입</button>                             
-                            </form>
+                            </form>                            
+                            <br><br>
+                            
+                            <button type="button" onclick="idSearch()">아이디 찾기</button>
+                            <button type="button" onclick="pwdSearch()">비밀번호 찾기</button>
                             
                             
-                            <br>   
-                            <button class="link-button" onclick="location.href='/'" >메인화면</button>   
                             
+                            <br><br>
+                            
+    						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=UKU4azkZUS5fj9tK1XKf&state=STATE_STRING&redirect_uri=http://localhost:8090/product/naver_login">
+        						<img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 로그인 버튼" style="width: 150px; height: auto; ">
+    						</a>
                         </div>
-
-
-
-
-
-
-
+       
+       
+       
+       
+       <script>
+       		function idSearch() {
+					var url = "/product/id_search";
+					window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+			}
+       			
+       			
+       	
+       
+       </script>
+                        
+                        
+                        
+                        
+                        
 
 
 <!-- Js Plugins -->

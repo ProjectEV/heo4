@@ -10,6 +10,14 @@
   		from user
   		where user_id=#{user_id} and user_password=#{user_password}
   	</select>
+  	
+  	<!-- 네이버 로그인 처리 -->
+  	<insert id="naver_login" parameterType="NaverUserInfo">
+  		insert into naver_user(email, name)
+  		values (#{email}, #{name})
+  	</insert>
+  	
+  	
   
   <!-- 회원가입 처리 -->
   	<insert id="join" parameterType="UserDTO">
@@ -22,8 +30,8 @@
   <!-- 리뷰작성 처리 -->	
   	<insert id="review" parameterType="BoardsDTO">
   		insert into boards(boards_title, boards_content, boards_userid, boards_regdate,
-  		boards_readcnt, boards_category, del, boards_productid)
-  		values(#{boards_title}, #{boards_content}, #{boards_userid}, curdate(), 0,1,0, #{boards_productid})
+  		boards_readcnt, boards_category, del, boards_productid, boards_review_score)
+  		values(#{boards_title}, #{boards_content}, #{boards_userid}, curdate(), 0,1,0, #{boards_productid}, #{boards_review_score})
   	</insert>
   	
   	<!-- 아이디 중복체크 처리 -->
@@ -31,6 +39,37 @@
   		select count(*) from user
   		where user_id = #{user_id};
   	</select>
+  	
+  	<!-- 아이디 찾기 처리 -->
+  	<select id="id_search" parameterType="java.util.Map" resultType="java.lang.String">
+  		select user_id 
+  		from user
+  		where user_email = #{user_email} and user_name = #{user_name};
+  	</select>
+  	
+  	<!-- 제품 상세페이지 -->
+   <select id="productDetail" parameterType="java.lang.String" resultType="ProductDTO">
+	  select *
+	  from product
+	  where product_id = #{product_id}
+   </select>
+   
+   <!-- 파일 조회 -->
+  <select id="fileSelect" parameterType="java.lang.String" resultType="java.lang.String">
+	  select file_name
+	  from file
+	  where file_connection_id=#{product_id}
+  </select>
+  
+  <!-- 다중리뷰조회 -->
+  <select id="review_list" parameterType="java.lang.String" resultType="BoardsDTO">
+  	select *
+  	from boards
+  	where boards_productid = #{boards_productid}
+  </select>
+  
+  	
+  	
   
   
   </mapper>

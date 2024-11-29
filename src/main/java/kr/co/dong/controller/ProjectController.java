@@ -1,5 +1,6 @@
 package kr.co.dong.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,20 +10,26 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mysql.cj.Session;
-
-import kr.co.dong.board.BoardDTO;
+import kr.co.dong.board.AuthService;
 import kr.co.dong.board.BoardsDTO;
+import kr.co.dong.board.NaverUserInfo;
+import kr.co.dong.board.ProductDTO;
 import kr.co.dong.board.ProjectService;
 import kr.co.dong.board.UserDTO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProjectController {
@@ -31,9 +38,40 @@ public class ProjectController {
 	@Inject
 	ProjectService projectService;
 	
+	@Inject
+	AuthService authService;
+
+    @Autowired
+    public void SocialLoginController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    // 네이버 로그인 콜백
+	@RequestMapping(value ="product/naver_login", method = RequestMethod.GET)
+    public String naverCallback(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session) {
+        try {
+            // 1. 액세스 토큰 발급
+            String accessToken = authService.getAccessToken(code);
+
+            // 2. 사용자 정보 가져오기
+            NaverUserInfo userInfo = authService.getUserInfo(accessToken);
+
+            // 3. 세션에 사용자 정보 저장
+            session.setAttribute("socialUser", userInfo);
+            
+            // 4. 메인 페이지로 리다이렉트
+            return "redirect:/";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/login?error=true";
+        }
+    }
+	
+
+	
 	//로그인처리
 	@RequestMapping(value ="product/login", method = RequestMethod.GET) 
-	
 	public String login() {
 		return "login_2";
 	}
@@ -52,6 +90,21 @@ public class ProjectController {
 			return "redirect:/";
 		}
 	}
+	
+	//로그아웃 처리
+	@RequestMapping(value="product/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		session.invalidate();
+		logger.info("로그아웃 구현");
+		rttr.addFlashAttribute("msg","로그아웃 완료");
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
 	
 	//회원가입  처리
 	@RequestMapping(value ="product/join", method = RequestMethod.GET)
@@ -105,8 +158,11 @@ public class ProjectController {
 		
 	}
 	
+	//중복체크 처리
 	@RequestMapping(value="product/id_check", method= RequestMethod.GET)
-	public String id_check() {
+	public String id_check(@RequestParam("user_id")String user_id, HttpServletRequest request, Model model) throws Exception{
+		model.addAttribute("user_id", user_id);
+
 		logger.info("중복체크 화면");
 		return "id_check";
 	}
@@ -123,11 +179,73 @@ public class ProjectController {
 		model.addAttribute("user_id", user_id);
 		
 		return "id_check";
-		
-		
-		
+	
+	}
+	
+	//아이디  찾기 처리
+	@RequestMapping(value="product/id_search", method = RequestMethod.GET)
+	public String id_search() {
+		logger.info("아이디 찾기 화면");
+		return "id_search";
+	}
+	
+	@RequestMapping(value="product/id_search", method = RequestMethod.POST)
+	public String id_Search(@RequestParam Map<String,Object> map, 
+		HttpServletRequest request, HttpServletResponse response,
+		RedirectAttributes rttr, Model model ) throws Exception {
+			request.setCharacterEncoding("UTF-8");
+			logger.info("아이디 찾기");
+			
+			String id = projectService.id_search(map);
+			
+			model.addAttribute("id",id);
+			
+			if(id == null) {
+				rttr.addFlashAttribute("msg","존재하지 않는 아이디입니다.");
+			}else {
+				rttr.addFlashAttribute("msg",id+"입니다.");
+			}
+			
+			
+			//get으로 감
+			return "redirect:/product/id_search";
+					
+			
+			
+			
+			
+	
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//제품 상세페이지
+		@RequestMapping(value="product/detail", method=RequestMethod.GET)
+		public String ProductDetail(@RequestParam("product_id") String product_id, Model model) {
+			ProductDTO vo = projectService.productDetail(product_id);
+			model.addAttribute("product", vo);
+			
+			//제품의 모든 이미지 조회
+			List<String> file_name = projectService.fileSelect(product_id);
+			model.addAttribute("file_name", file_name);
+			
+			List<BoardsDTO> review_list = projectService.review_list(product_id);
+			model.addAttribute("review_list", review_list);
+
+			//상품평
+		
+			logger.info("상세페이지");
+			return "product_detail";
+		}
 	
 	
 	

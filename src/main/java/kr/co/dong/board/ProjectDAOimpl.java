@@ -1,6 +1,7 @@
 package kr.co.dong.board;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -21,7 +22,15 @@ public class ProjectDAOimpl implements ProjectDAO{
 	public Map<String, Object> login(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace+".login",map);
+		}
+	
+	//네이버 로그인 처리
+	@Override
+	public int naver_login(NaverUserInfo naveruserinfo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(nameSpace+".naver_login",naveruserinfo);
 	}
+
 	//회원가입 처리
 	@Override
 	public int join(UserDTO userDTO) {
@@ -41,5 +50,33 @@ public class ProjectDAOimpl implements ProjectDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace+".id_check",user_id);
 	}
+	
+	@Override
+	public String id_search(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace+".id_search", map);
+	}
+
+	@Override
+	public ProductDTO productDetail(String product_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".productDetail", product_id);
+	}
+
+	@Override
+	public List<String> fileSelect(String product_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".fileSelect", product_id);
+	}
+
+	@Override
+	public List<BoardsDTO> review_list(String product_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace+".review_list", product_id);
+	}
+
+	
+	
+	
 
 }

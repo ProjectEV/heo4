@@ -11,9 +11,16 @@ public class BoardsDTO {
 	private int boards_category;
 	private int del;
 	private String boards_productid;
+	private int boards_review_score;
 	
 	
 	
+	public int getBoards_review_score() {
+		return boards_review_score;
+	}
+	public void setBoards_review_score(int boards_review_score) {
+		this.boards_review_score = boards_review_score;
+	}
 	public String getBoards_productid() {
 		return boards_productid;
 	}
@@ -70,10 +77,10 @@ public class BoardsDTO {
 	}
 	@Override
 	public String toString() {
-		return "BoardsVO [boards_no=" + boards_no + ", boards_title=" + boards_title + ", boards_content="
+		return "BoardsDTO [boards_no=" + boards_no + ", boards_title=" + boards_title + ", boards_content="
 				+ boards_content + ", boards_userid=" + boards_userid + ", boards_regdate=" + boards_regdate
 				+ ", boards_readcnt=" + boards_readcnt + ", boards_category=" + boards_category + ", del=" + del
-				+ ", boards_productid=" + boards_productid + "]";
+				+ ", boards_productid=" + boards_productid + ", boards_review_score=" + boards_review_score + "]";
 	}
 
 }
