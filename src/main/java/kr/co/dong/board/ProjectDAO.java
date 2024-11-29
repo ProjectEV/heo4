@@ -19,6 +19,14 @@ public interface ProjectDAO {
 	
 	//아이디 찾기 처리
 	public String id_search(Map<String, Object> map);
+	
+	//비밀번호 찾기 처리
+	public String pwd_search(String user_id);
+	
+	
+	//비밀번호 변경 처리
+	
+	public int pwd_change(String user_id, String user_password);
 		
 	
 	//리뷰작성 처리

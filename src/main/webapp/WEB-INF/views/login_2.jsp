@@ -89,8 +89,11 @@
                             
                             
                             
-                            <br><br>
+                            <br><br><br><br><br><br>
                             
+                            
+                            -----------------------------소셜 로그인----------------------------
+                            <br><br>
     						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=UKU4azkZUS5fj9tK1XKf&state=STATE_STRING&redirect_uri=http://localhost:8090/product/naver_login">
         						<img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 로그인 버튼" style="width: 150px; height: auto; ">
     						</a>
@@ -101,10 +104,14 @@
        
        <script>
        		function idSearch() {
-					var url = "/product/id_search";
-					window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+				var url = "/product/id_search";
+				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
 			}
-       			
+       		
+       		function pwdSearch() {
+				var url = "/product/pwd_search";
+				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+			}	
        			
        	
        

@@ -100,12 +100,6 @@ public class ProjectController {
 		return "redirect:/";
 	}
 	
-	
-	
-	
-	
-	
-	
 	//회원가입  처리
 	@RequestMapping(value ="product/join", method = RequestMethod.GET)
 	public String join() {
@@ -205,18 +199,66 @@ public class ProjectController {
 			}else {
 				rttr.addFlashAttribute("msg",id+"입니다.");
 			}
-			
-			
 			//get으로 감
 			return "redirect:/product/id_search";
-					
 			
+	}
+			
+			
+		//비밀번호 찾기 처리
+		@RequestMapping(value="product/pwd_search", method = RequestMethod.GET)
+		public String pwd_search() {
+			logger.info("비밀번호 찾기 화면");
+			return "pwd_search";
+		}
+		
+		@RequestMapping(value="product/pwd_search", method = RequestMethod.POST)
+		public String pwd_search(@RequestParam("user_id")String user_id, HttpServletRequest request,
+				HttpServletResponse response, RedirectAttributes rttr, Model model)throws Exception{
+			request.setCharacterEncoding("UTF-8");
+			logger.info("비밀번호 찾기");
+			
+			String id = projectService.pwd_search(user_id);
+			
+			 if (id == null) { // ID가 없는 경우
+			        rttr.addFlashAttribute("msg", "존재하지 않는 아이디입니다."); // 메시지 전달
+			        return "redirect:/product/pwd_search"; // 비밀번호 찾기 화면으로 이동
+			    }
+
+			    model.addAttribute("id", id); // ID를 JSP로 전달
+			    return "pwd_search"; // 성공 시 JSP로 전달
+			}
+		
+		
+			//비밀번호 변경 처리
+			@RequestMapping(value="product/pwd_change", method = RequestMethod.POST)
+			public String pwd_change(@RequestParam("user_id")String user_id, @RequestParam("user_password")String user_password, HttpServletRequest request,
+				 HttpServletResponse response, RedirectAttributes rttr, Model model)throws Exception{
+				request.setCharacterEncoding("UTF-8");
+				logger.info("비밀번호 변경");
+				
+				int result = projectService.pwd_change(user_id, user_password);
+				
+				//model.addAttribute("r",r);
+				
+				if (result > 0) { // 변경 성공
+			        rttr.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다!");
+			    } else { // 변경 실패
+			        rttr.addFlashAttribute("msg", "비밀번호 변경에 실패했습니다. 다시 시도해 주세요.");
+			    }
+
+			    return "redirect:/product/pwd_search"; // 완료 후 비밀번호 찾기 화면으로 이동
+			}
+			
+		
+			
+		
 			
 			
 			
 	
 		
-	}
+	
 	
 	
 	

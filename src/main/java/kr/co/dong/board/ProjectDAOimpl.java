@@ -51,11 +51,32 @@ public class ProjectDAOimpl implements ProjectDAO{
 		return sqlSession.selectOne(nameSpace+".id_check",user_id);
 	}
 	
+	
+	
 	@Override
 	public String id_search(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace+".id_search", map);
 	}
+	
+	@Override
+	public String pwd_search(String user_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace+".pwd_search", user_id);
+	}
+	
+	
+	@Override
+	public int pwd_change(String user_id, String user_password) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", user_id);
+		map.put("user_password", user_password);
+		return sqlSession.update(nameSpace+".pwd_change", map);
+	}
+
+	
+	
 
 	@Override
 	public ProductDTO productDetail(String product_id) {
@@ -75,6 +96,8 @@ public class ProjectDAOimpl implements ProjectDAO{
 		return sqlSession.selectList(nameSpace+".review_list", product_id);
 	}
 
+	
+	
 	
 	
 	

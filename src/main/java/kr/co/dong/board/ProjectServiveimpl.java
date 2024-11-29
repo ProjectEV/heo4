@@ -58,6 +58,22 @@ public class ProjectServiveimpl implements ProjectService {
 		// TODO Auto-generated method stub
 		return projectDAO.id_search(map);
 	}
+	
+	@Override
+	public String pwd_search(String user_id) {
+		// TODO Auto-generated method stub
+		return projectDAO.pwd_search(user_id);
+	}
+	
+	@Override
+	public int pwd_change(String user_id, String user_password) {
+		// TODO Auto-generated method stub
+		return projectDAO.pwd_change(user_id, user_password);
+	}
+	
+	
+	
+	
 
 	@Override
 	public ProductDTO productDetail(String product_id) {
@@ -76,6 +92,10 @@ public class ProjectServiveimpl implements ProjectService {
 		// TODO Auto-generated method stub
 		return projectDAO.review_list(product_id);
 	}
+
+	
+
+	
 
 
 	

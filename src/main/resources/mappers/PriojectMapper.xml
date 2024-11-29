@@ -47,6 +47,23 @@
   		where user_email = #{user_email} and user_name = #{user_name};
   	</select>
   	
+  	<!-- 비밀번호 찾기 처리 -->
+  	<select id="pwd_search" parameterType="java.lang.String" resultType="java.lang.String">
+  		select user_id
+  		from user
+  		where user_id = #{user_id};
+  	</select>
+  	
+  	<!-- 비밀번호 변경 처리 -->
+  	<update id="pwd_change" parameterType="java.util.Map">
+  		update user
+  		set user_password = #{user_password}
+  		where user_id = #{user_id}
+  	</update>
+  	
+  	
+  	
+  	
   	<!-- 제품 상세페이지 -->
    <select id="productDetail" parameterType="java.lang.String" resultType="ProductDTO">
 	  select *
