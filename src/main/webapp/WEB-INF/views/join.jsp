@@ -155,43 +155,29 @@
     </header>
     <!-- Header Section End -->
 
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Shopping cart</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+    
+    
 
     <!-- Checkout Section Begin -->
-    <section class="checkout spad">
+    
+    <section class="checkout spad" style="margin-left: 350px;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
-                    here to enter your code.</h6>
-                </div>
-            </div>
+
             <form method="post" action="/product/join" class="checkout__form" name="join_form" onsubmit="return join();">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h5>회원가입</h5>
+                  		<div style="text-align: center;">
+                        	<h5>회원가입</h5>
+                      	</div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
                                 <div class="checkout__form__input">
                                     <p>아이디 <span>*</span></p>
                                     <input type="text" id="user_id" name="user_id" placeholder="* 4-12자의 영문 대소문자와 숫자로만 입력" required>
                                 </div>
                             </div>
                             
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="checkout__form__input">
                            			 <button type="button" onclick="idCheck()" class="site-btn" style="width: 116.01px; height: 44.98px; margin-top: 35px; " >중복체크</button>
                            			 
@@ -252,7 +238,7 @@
 						    </div>
 						    
 						          
-						    <div class="col-lg-6 col-md-6 col-sm-6">
+						    <div class="col-lg-12">
 							    <!-- 제목은 flex 외부에서 고정 -->
 							    <div class="checkout__form__input" style="position: relative;">
 							        <p style="margin-bottom: 5px;">이메일 <span>*</span></p> <!-- 상단 고정 -->
@@ -279,13 +265,14 @@
                            </div>
                         </div>
                     </div>
-                    <div style="margin-left: 250px;">
+                    <div style="margin-left: 250px; ">
                     <button type="submit" class="site-btn">회원가입</button>&nbsp;&nbsp;
                     <button type="reset" class="site-btn">다시작성</button>
                     </div>
                 </form>
             </div>
         </section>
+   
         <!-- Checkout Section End -->
 
         <!-- Instagram Begin -->

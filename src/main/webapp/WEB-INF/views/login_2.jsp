@@ -64,6 +64,27 @@
             cursor: pointer; /* 클릭 가능한 커서 표시 */	
              text-decoration: none; /* 처음부터 밑줄 제거 */
         }
+        
+        .text-button {
+       		background: none; /* 배경 제거 */
+       		border: none;    /* 테두리 제거 */
+       		color: inherit;  /* 글씨 색은 부모 요소와 동일하게 */
+        	font: inherit;   /* 글꼴 상속 */
+        	cursor: pointer; /* 클릭할 수 있게 커서 스타일 변경 */
+        	padding: 0;      /* 여백 제거 */
+   		}
+
+   		 .text-button:hover {
+       		text-decoration: underline; /* 호버 시 밑줄 표시 */
+    	}
+    
+    	.separator {
+    		color: gray;      /* 구분선 색상 */
+    		font-size: 16px;  /* 크기 조정 */
+    		margin: 0 10px;   /* 버튼과 구분선 사이 여백 */
+   		}
+        
+        
      
     </style>
     		
@@ -74,7 +95,7 @@
  
 <body>
 
-	 <div class="contact__form">
+	 					<div class="contact__form">
                             <h5>로그인</h5>
                             <form method="post" action="/product/login" name="login_form" >
                                 <input type="text" id="user_id" name="user_id" style="width: 300px;" placeholder="아이디"> <br>
@@ -84,18 +105,22 @@
                             </form>                            
                             <br><br>
                             
-                            <button type="button" onclick="idSearch()">아이디 찾기</button>
-                            <button type="button" onclick="pwdSearch()">비밀번호 찾기</button>
-                            
+                           <button type="button" onclick="idSearch()" class="text-button">아이디 찾기</button>
+                             <span class="separator">|</span>
+                            <button type="button" onclick="pwdSearch()"class="text-button">비밀번호 찾기</button>
                             
                             
                             <br><br><br><br><br><br>
                             
                             
-                            -----------------------------소셜 로그인----------------------------
-                            <br><br>
+                           <div style="display: flex; align-items: center;">
+   								<hr style="flex-grow: 1;">
+    							<span style="margin: 0 10px;font-size: 12px;">소셜 로그인</span>
+    							<hr style="flex-grow: 1;">
+							</div>
+                            <br>
     						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=UKU4azkZUS5fj9tK1XKf&state=STATE_STRING&redirect_uri=http://localhost:8090/product/naver_login">
-        						<img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 로그인 버튼" style="width: 150px; height: auto; ">
+        						<img src="https://static.nid.naver.com/oauth/big_g.PNG" alt="네이버 로그인 버튼" style="width: 200px; height: auto; ">
     						</a>
                         </div>
        
@@ -105,12 +130,12 @@
        <script>
        		function idSearch() {
 				var url = "/product/id_search";
-				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=400");
 			}
        		
        		function pwdSearch() {
 				var url = "/product/pwd_search";
-				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=200");
+				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=400");
 			}	
        			
        	

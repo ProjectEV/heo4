@@ -197,7 +197,7 @@ public class ProjectController {
 			if(id == null) {
 				rttr.addFlashAttribute("msg","존재하지 않는 아이디입니다.");
 			}else {
-				rttr.addFlashAttribute("msg",id+"입니다.");
+				rttr.addFlashAttribute("msg","당신의 아이디는 "+id+"입니다.");
 			}
 			//get으로 감
 			return "redirect:/product/id_search";
