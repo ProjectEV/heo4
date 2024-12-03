@@ -179,9 +179,11 @@
         								<c:forEach begin="1" end="${review_list.boards_review_score}">
                     						★
                 						</c:forEach>
-                						<c:forEach begin="${5 - review.boards_review_score}" end="5">
+                						<c:forEach begin="1" end="${5-review_list.boards_review_score}">
                     						☆
                 						</c:forEach>
+                						
+                						
             							<p><strong>제목:</strong> ${review_list.boards_title}</p>
             							<p><strong>내용:</strong> ${review_list.boards_content}</p>
             							<p><strong>작성자:</strong> ${review_list.boards_userid}</p>

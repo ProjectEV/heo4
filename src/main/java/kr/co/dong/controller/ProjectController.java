@@ -55,6 +55,13 @@ public class ProjectController {
 
             // 2. 사용자 정보 가져오기
             NaverUserInfo userInfo = authService.getUserInfo(accessToken);
+            
+            int result = projectService.naver_login(userInfo);
+            	if (result > 0) {
+            		logger.info("정보 저장 성공");
+            	} else {
+            		logger.info("정보 저장 실패");
+            	}
 
             // 3. 세션에 사용자 정보 저장
             session.setAttribute("socialUser", userInfo);
@@ -78,15 +85,17 @@ public class ProjectController {
 	
 	@RequestMapping(value ="product/login", method = RequestMethod.POST)
 	public String login(@RequestParam Map<String,Object> map,
-			HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+			HttpServletRequest request, HttpServletResponse response, HttpSession session, RedirectAttributes rttr) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, Object> user = projectService.login(map);
 		
 		if(user == null) {
 			logger.info("로그인 실패");
+			rttr.addFlashAttribute("msg","로그인 실패");
 			return "redirect:/product/login";
 		}else {
 			session.setAttribute("user", user);
+			rttr.addFlashAttribute("msg","로그인 성공");
 			return "redirect:/";
 		}
 	}

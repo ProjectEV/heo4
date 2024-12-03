@@ -10,7 +10,7 @@ public interface ProjectService {
 	
 	
 	//네이버 로그인 처리
-		public int naver_login(NaverUserInfo naveruserinfo);
+	public int naver_login(NaverUserInfo naveruserinfo);
 	
 	//회원가입 처리
 	public int join(UserDTO userDTO);

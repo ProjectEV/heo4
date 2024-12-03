@@ -27,12 +27,19 @@ public class ProjectServiveimpl implements ProjectService {
 		return projectDAO.login(map);
 	}
 	
-	@Override
-	public int naver_login(NaverUserInfo naveruserinfo) {
+//	@Override
+//	public int naver_login(NaverUserInfo naveruserinfo) {
 		// TODO Auto-generated method stub
-		return projectDAO.naver_login(naveruserinfo);
-	}
-	
+		
+//		if(projectDAO.isEmailExists(naveruserinfo.getEmail()) == 0) {
+//			
+//			return projectDAO.naver_login(naveruserinfo);	
+//		} else {
+//			return 0;
+//		}
+//		
+//	}
+//	
 	
 
 	@Override
@@ -91,6 +98,12 @@ public class ProjectServiveimpl implements ProjectService {
 	public List<BoardsDTO> review_list(String product_id) {
 		// TODO Auto-generated method stub
 		return projectDAO.review_list(product_id);
+	}
+
+	@Override
+	public int naver_login(NaverUserInfo naveruserinfo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

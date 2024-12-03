@@ -432,7 +432,9 @@
 	//유효성 검사 funtion
 	function join() {
 		
+		var phoneReg = /^\d{4}$/;
 		var idReg = /^[a-zA-Z0-9]{4,12}$/;
+		
 		
 		var user_id = document.getElementById("user_id");
 		var user_password = document.getElementById("user_password");
@@ -456,6 +458,8 @@
 	    var user_email = email1 + '@' + email2;
 	    document.getElementById("user_email").value = user_email;
 
+		
+		
 		if (!idReg.test(user_id.value)) {
 			alert("아이디 형식을 확인하세요");
 			return false;
@@ -471,6 +475,16 @@
 			return false;
 		}
 		
+		if (!phoneReg.test(phone2)) {
+			alert("중간 번호 확인하세요");
+			return false;
+		}
+		
+		if (!phoneReg.test(phone3)) {
+			alert("마지막 번호 확인하세요")
+			return false;
+		}
+		
 		if(document.join_form.reid.value == "") {
 			alert("중복 체크를 하지 않았습니다.");
 			join_form.user_id.focus();
@@ -478,6 +492,12 @@
 		}
 			
 		return true;
+		
+		
+		
+		
+		
+		
 	}
 	
 	function idCheck(){

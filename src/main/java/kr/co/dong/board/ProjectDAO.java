@@ -3,6 +3,10 @@ package kr.co.dong.board;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.stream.events.Namespace;
+
+import org.apache.ibatis.session.SqlSession;
+
 public interface ProjectDAO {
 
 	//로그인 처리
@@ -10,6 +14,12 @@ public interface ProjectDAO {
 	
 	//네이버 로그인 처리
 	public int naver_login(NaverUserInfo naveruserinfo);
+	
+	
+	//네이버 이메일 중복 체크 처리
+	//public int isEmailExists(String email) {
+		//return SqlSession.selectOne(NameSpace)
+	//}
 		
 	//회원가입 처리
 	public int join(UserDTO userDTO);
