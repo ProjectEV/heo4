@@ -113,10 +113,11 @@
 
 
 		<c:if test="${id != null}">
-			<form method="post" action="/product/pwd_change">
+			<form method="post" action="/product/pwd_change" onsubmit="return change();">
 				<input type="hidden" name="user_id" id="user_id" value="${id}">
 				<p>변경 할 비밀번호를 적어주세요</p>
 				 <input type="password" name="user_password" id="user_password" placeholder="비밀번호"  style="width: 300px; padding: 20px;"><br>
+				 <input type="password" name="password_ch" id="password_ch" placeholder="비밀번호 확인"  style="width: 300px; padding: 20px;"><br>
 				<input type="submit" value="변경">
 			</form>
 		</c:if>
@@ -133,15 +134,25 @@
        
        
        <script>
-       		function idSearch() {
-				var url = "/product/id_search";
-				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=400");
-			}
-       		
-       		function pwdSearch() {
-				var url = "/product/pwd_search";
-				window.open(url, "_blank_2","toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=450, height=400");
-			}	
+       		function change() {
+       			
+       			var idReg = /^[a-zA-Z0-9]{4,12}$/;
+       			
+       			var user_password = document.getElementById("user_password");
+       			var password_ch = document.getElementById("password_ch");
+       			
+       			if(!idReg.test(user_password.value)) {
+       				alert("비밀번호 형식을 확인하세요");
+       				return false;
+       			}
+       			
+       			if (user_password.value != password_ch.value) {
+       				alert("비밀번호가 일치하는지 확인하세요");
+       				return false;
+       			}
+       			
+       			return true;
+       		}
        			
        	
        
