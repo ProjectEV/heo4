@@ -26,10 +26,20 @@ public class ProjectDAOimpl implements ProjectDAO{
 	
 	//네이버 로그인 처리
 	@Override
-	public int naver_login(NaverUserInfo naveruserinfo) {
+	public int naver_login(UserDTO userDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(nameSpace+".naver_login",naveruserinfo);
+		return sqlSession.insert(nameSpace+".naver_login",userDTO);
 	}
+	
+	@Override
+	public int isEmailExists(String user_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace+".isEmailExists", user_id);
+	}
+
+	
+	
+	
 
 	//회원가입 처리
 	@Override
@@ -95,6 +105,7 @@ public class ProjectDAOimpl implements ProjectDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace+".review_list", product_id);
 	}
+
 
 	
 	

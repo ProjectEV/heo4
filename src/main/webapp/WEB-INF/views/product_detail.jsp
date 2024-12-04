@@ -177,10 +177,10 @@
                                  <c:forEach var="review_list" items="${review_list}">
         							<div class="review-item">
         								<c:forEach begin="1" end="${review_list.boards_review_score}">
-                    						★
+                    						<i class="fa fa-star"></i>
                 						</c:forEach>
                 						<c:forEach begin="1" end="${5-review_list.boards_review_score}">
-                    						☆
+                    						<i class="fa fa-star-o"></i>
                 						</c:forEach>
                 						
                 						

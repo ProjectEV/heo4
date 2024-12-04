@@ -12,6 +12,14 @@ public class UserDTO {
 	public String user_joindate;
 	
 	
+	public UserDTO(String user_name, String user_id, String user_phone) {
+		this.user_name = user_name;
+		this.user_id = user_id;
+		this.user_phone = user_phone;
+	}
+	
+	
+	
 	
 	public String getUser_id() {
 		return user_id;

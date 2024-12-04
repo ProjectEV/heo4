@@ -4,6 +4,8 @@
 <html>
 <head>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.lang.String" %>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -15,10 +17,12 @@
 
 <% 
     // 세션에서 "user" 객체를 가져옵니다.
-    Map<String, Object> user = (Map<String, Object>) session.getAttribute("user"); 
+    //Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+    //String userId = (String) user.get("user_id"); 
+    String userId = (String) session.getAttribute("user"); 
 %>
 
-<% if (user == null) { %>	
+<% if (userId == null) { %>	
     <!-- 로그인이 안 된 경우 -->
     <button onclick="location.href='/product/login'">로그인</button>
 <% } else { %>

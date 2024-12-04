@@ -4,7 +4,7 @@ public interface AuthService {
 	
 	String getAccessToken(String code);
 	
-    NaverUserInfo getUserInfo(String accessToken);
+    UserDTO getUserInfo(String accessToken);
     
     
 

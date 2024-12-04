@@ -48,13 +48,15 @@ public class ProjectController {
 
     // 네이버 로그인 콜백
 	@RequestMapping(value ="product/naver_login", method = RequestMethod.GET)
-    public String naverCallback(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session) {
+    public String naverCallback(@RequestParam("code") String code, @RequestParam("state") String state,
+    		@RequestParam Map<String,Object> map,
+    		HttpSession session) {
         try {
             // 1. 액세스 토큰 발급
             String accessToken = authService.getAccessToken(code);
 
             // 2. 사용자 정보 가져오기
-            NaverUserInfo userInfo = authService.getUserInfo(accessToken);
+            UserDTO userInfo = authService.getUserInfo(accessToken);
             
             int result = projectService.naver_login(userInfo);
             	if (result > 0) {
@@ -64,7 +66,16 @@ public class ProjectController {
             	}
 
             // 3. 세션에 사용자 정보 저장
-            session.setAttribute("socialUser", userInfo);
+            //session.setAttribute("user", userInfo);
+            String user_id = userInfo.getUser_id();
+            
+            
+            
+//            Map<String, Object> user = projectService.login(map);
+//            map.put("user_id", user_id);
+            	
+            session.setAttribute("user", user_id);
+            
             
             // 4. 메인 페이지로 리다이렉트
             return "redirect:/";
@@ -75,7 +86,6 @@ public class ProjectController {
         }
     }
 	
-
 	
 	//로그인처리
 	@RequestMapping(value ="product/login", method = RequestMethod.GET) 
@@ -94,7 +104,7 @@ public class ProjectController {
 			rttr.addFlashAttribute("msg","로그인 실패");
 			return "redirect:/product/login";
 		}else {
-			session.setAttribute("user", user);
+			session.setAttribute("user", user.get("user_id"));
 			rttr.addFlashAttribute("msg","로그인 성공");
 			return "redirect:/";
 		}
@@ -106,7 +116,12 @@ public class ProjectController {
 		session.invalidate();
 		logger.info("로그아웃 구현");
 		rttr.addFlashAttribute("msg","로그아웃 완료");
-		return "redirect:/";
+		
+		String naverLogoutUrl = "https://nid.naver.com/nidlogin.logout?returl=http://localhost:8090/";
+		
+		
+		
+		return "redirect:" + naverLogoutUrl;
 	}
 	
 	//회원가입  처리

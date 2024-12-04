@@ -27,20 +27,26 @@ public class ProjectServiveimpl implements ProjectService {
 		return projectDAO.login(map);
 	}
 	
-//	@Override
-//	public int naver_login(NaverUserInfo naveruserinfo) {
+	
+	@Override
+	public int naver_login(UserDTO userDTO) {
 		// TODO Auto-generated method stub
 		
-//		if(projectDAO.isEmailExists(naveruserinfo.getEmail()) == 0) {
-//			
-//			return projectDAO.naver_login(naveruserinfo);	
-//		} else {
-//			return 0;
-//		}
-//		
-//	}
-//	
+		if(projectDAO.isEmailExists(userDTO.getUser_id()) == 0) {
+			
+			return projectDAO.naver_login(userDTO);	
+		} else {
+			return 0;
+		}
+		
+	}
 	
+	@Override
+	public int isEmailExists(String user_id) {
+		// TODO Auto-generated method stub
+		return projectDAO.isEmailExists(user_id);
+	}
+
 
 	@Override
 	public int join(UserDTO userDTO) {
@@ -100,12 +106,9 @@ public class ProjectServiveimpl implements ProjectService {
 		return projectDAO.review_list(product_id);
 	}
 
-	@Override
-	public int naver_login(NaverUserInfo naveruserinfo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
+	
+	
 	
 
 	

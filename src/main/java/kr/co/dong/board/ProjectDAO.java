@@ -13,13 +13,11 @@ public interface ProjectDAO {
 	public Map<String, Object> login(Map<String,Object> map);
 	
 	//네이버 로그인 처리
-	public int naver_login(NaverUserInfo naveruserinfo);
+	public int naver_login(UserDTO userDTO);
 	
 	
-	//네이버 이메일 중복 체크 처리
-	//public int isEmailExists(String email) {
-		//return SqlSession.selectOne(NameSpace)
-	//}
+	//네이버 아이디 중복 처리
+	public int isEmailExists(String user_id);
 		
 	//회원가입 처리
 	public int join(UserDTO userDTO);

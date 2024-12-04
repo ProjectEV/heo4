@@ -12,10 +12,16 @@
   	</select>
   	
   	<!-- 네이버 로그인 처리 -->
-  	<insert id="naver_login" parameterType="NaverUserInfo">
-  		insert into naver_user(email, name)
-  		values (#{email}, #{name})
+  	<insert id="naver_login" parameterType="UserDTO">
+  		insert into user(user_id, user_name, user_phone, user_admin)
+  		values (#{user_id}, #{user_name}, #{user_phone}, 0)
   	</insert>
+  	
+  	<select id="isEmailExists" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		select count(*)
+  		from user
+  		where user_id = #{user_id}
+  	</select>
   	
   	
   

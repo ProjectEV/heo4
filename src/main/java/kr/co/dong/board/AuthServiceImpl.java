@@ -41,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
 
     // 네이버 사용자 정보 요청
     @Override
-    public NaverUserInfo getUserInfo(String accessToken) {
+    public  UserDTO getUserInfo(String accessToken) {
         String url = "https://openapi.naver.com/v1/nid/me";
         
         RestTemplate restTemplate = new RestTemplate();
@@ -59,12 +59,12 @@ public class AuthServiceImpl implements AuthService {
             JsonNode jsonNode = objectMapper.readTree(response);  // 응답을 JSON으로 변환
             JsonNode responseNode = jsonNode.get("response");
 
-            String name = responseNode.get("name").asText();
-            String email = responseNode.get("email").asText();
-            
+            String user_name = responseNode.get("name").asText();
+            String user_id = responseNode.get("email").asText();
+            String user_phone = responseNode.get("mobile").asText();
             
 
-            return new NaverUserInfo(name, email); // NaverUserInfo 객체 반환
+            return new UserDTO(user_name, user_id, user_phone); // NaverUserInfo 객체 반환
             
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse user info response", e);
